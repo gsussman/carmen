@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'signup',
     'frontpage',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+#   'allauth',
+#   'allauth.account',
+#   'allauth.socialaccount',
 ]
 
 MIDDLEWARE_CLASSES = [
