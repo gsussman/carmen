@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block head_javascript_page %}
+<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+{% endblock head_javascript_page %}
+
+{% block content %}
+<form method="post" action="." class="wide">
+  {% csrf_token %}
+  <dl>
+    <div style="display:none">
+      <dt>
+        <label for="id_username">Username:</label>
+        {% if form.username.errors %}
+          <span class="error">{{ form.username.errors.as_text }}</span>
+        {% endif %}
+      </dt>
+      <dd>{{ form.username }}</dd>
+     </div>
+
+    <dt>
+      <label for="id_first_name">First Name:</label>
+      {% if form.first_name.errors %}
+        <span class="error">{{ form.first_name.errors.as_text }}</span>
+      {% endif %}
+     </dt>
+    
+    <dd>{{ form.first_name }}</dd>
+    
+  <br>
+
+    <dt>
+      <label for="id_password2">Last Name:</label>
+      {% if form.last_name.errors %}
+        <span class="error">{{ form.last_name.errors.as_text }}</span>
+      {% endif %}
+     </dt>
+    
+    <dd>{{ form.last_name }}</dd>
+    
+  <br>
+    
+    <dt>
+      <label for="id_email">Email address:</label>
+      {% if form.email.errors %}
+        <span class="error">{{ form.email.errors.as_text }}</span>
+      {% endif %}
+     </dt>
+    <dd>{{ form.email }}</dd>
+    
+    <br>
+    
+    <dt>
+      <label for="id_password1">Password:</label>
+      {% if form.password1.errors %}
+        <span class="error">{{ form.password1.errors.as_text }}</span>
+      {% endif %}
+     </dt>
+    
+    <dd>{{ form.password1 }}</dd>
+    <br>
+    
+    <dt>
+      <label for="id_password2">Password (type again to catch typos):</label>
+      {% if form.password2.errors %}
+        <span class="error">{{ form.password2.errors.as_text }}</span>
+      {% endif %}
+     </dt>
+    
+    <dd>{{ form.password2 }}</dd>
+    
+	<br>
+    <dt><input type="submit" value="Sign up" /></dt>
+  </dl>    
+    <input name="next" type="hidden" value="{{next}}">
+</form>
+
+{% endblock content %}
+
+
+{% block footer_javascript_page %}
+<script type="text/javascript">
+$(document).ready(function()
+{
+  $('#id_email').blur(function(e)
+  {
+    var email_address = $('#id_email').val();
+    $('#id_username').val(email_address);
+   });
+});
+</script>
+
+{% endblock footer_javascript_page %}
