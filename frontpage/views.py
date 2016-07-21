@@ -17,7 +17,6 @@ import json
 
 def search(request):
     form = LocationInput()
-    print "form"
     if request.method == "POST":
         form = LocationInput(request.POST)
         if form.is_valid():
@@ -61,9 +60,7 @@ def trip_details(request, name='unknown'):
     formloc = LocationInput()
     formtripshare = TripShare(instance=trip, prefix = 'triptag')
     if request.method == "POST":
-        print("1")
         if 'triptag' in request.POST:
-            print("2")
             tripshare = TripShare(request.POST, instance=trip, prefix = 'triptag')
             if tripshare.is_valid():
                 tripshare.save()
@@ -93,9 +90,7 @@ def trip_details_shared(request, name='unknown'):
     formloc = LocationInput()
     formtripshare = TripShare(instance=trip, prefix = 'triptag')
     if request.method == "POST":
-        print("1")
         if 'triptag' in request.POST:
-            print("2")
             tripshare = TripShare(request.POST, instance=trip, prefix = 'triptag')
             if tripshare.is_valid():
                 tripshare.save()
