@@ -1,5 +1,7 @@
 from django.conf.urls import url, include
 from . import views
+from registration.views import RegistrationView
+from views import RegView, MyRegistrationView
 
 # Create a new class that redirects the user to the index page, if successful at logging
 #class MyRegistrationView(RegistrationView):

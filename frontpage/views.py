@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from signup.models import Location, Trip
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
+from registration.views import ActivationView 
+from registration.backends.simple.views import RegistrationView
 
 # Create your views here.
 
@@ -110,6 +112,16 @@ def trip_details_shared(request, name='unknown'):
         'locations': locations,
         'form' : formloc,
         'tripform' : formtripshare})
+
+class RegView(RegistrationView):
+    def get_success_url(self, user):
+        return '/trips/'
+
+        # pulled from http://stackoverflow.com/questions/20108706/passing-success-url-to-cbv-django-registration
+
+class MyRegistrationView(RegistrationView):
+    def get_success_url(self, user):
+        return '/trips/'
 
 def auth(request):
     return render(request, 'frontpage/auth.html', {})
