@@ -7,8 +7,6 @@ from django.http import HttpResponse
 from signup.models import Location, Trip
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
-from registration.views import ActivationView 
-from registration.backends.simple.views import RegistrationView
 
 # Create your views here.
 
