@@ -37,7 +37,7 @@ def search(request):
                 return HttpResponseRedirect('/trips/')
             else:
                 request.session['trip-id'] = t.id
-                return HttpResponseRedirect('/auth/') 
+                return HttpResponseRedirect('/accounts/signup') 
     return render(request, 'frontpage/search.html', {'form': form})
 
 def trips(request):
