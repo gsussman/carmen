@@ -14,56 +14,13 @@ from registration.backends.simple.views import RegistrationView
 
 import json
 
-class PostExample(TemplateView):
-    template_name = 'start.html'
-
-    def post(self, request):
-        return HttpResponse(json.dumps({'key': 'value'}), mimetype="application/json")
-
-def home(request):
-
-    if request.method == "POST":
-        form = EmailSignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Thank you for signing up! We will let you know when we offically launch!') 
-        return HttpResponseRedirect('/')
-    else:
-    	form = EmailSignupForm()
-    	return render(request, 'frontpage/home.html', {'form': form})
-
-def hiw(request):
-
-    if request.method == "POST":
-        form = EmailSignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Thank you for signing up! We will let you know when we offically launch!') 
-        return HttpResponseRedirect('/')
-    else:
-        form = EmailSignupForm()
-        return render(request, 'frontpage/hiw.html', {'form': form})
-
-def test(request):
-
-    if request.method == "POST":
-        form = LocationInput(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Thank you for signing up! We will let you know when we offically launch!') 
-        return HttpResponseRedirect('/')
-    else:
-        form = LocationInput()
-        return render(request, 'frontpage/test.html', {'form': form})
 
 def search(request):
     form = LocationInput()
     print "form"
     if request.method == "POST":
-        print '1'
         form = LocationInput(request.POST)
         if form.is_valid():
-            print '2'
             t = Trip(trip_name = form.cleaned_data['city'])
             t.save()
             if Location.objects.filter(google_id=form.cleaned_data['google_id']).exists():
