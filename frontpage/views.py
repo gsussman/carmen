@@ -125,3 +125,9 @@ class MyRegistrationView(RegistrationView):
 
 def auth(request):
     return render(request, 'frontpage/auth.html', {})
+
+def birthday(request):
+    return render(request, 'frontpage/birthday.html', {})
+
+def ouradventures(request):
+    return render(request, 'frontpage/ouradventures.html', {})

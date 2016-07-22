@@ -15,9 +15,10 @@ class LocationInput(forms.ModelForm):
             'lat' : forms.TextInput(attrs = {'type': 'hidden'}),
             'lng' : forms.TextInput(attrs = {'type': 'hidden'}),   
             'trips' : forms.TextInput(attrs = {'type': 'hidden'}),  
+            'image_url' : forms.TextInput(attrs = {'type': 'hidden'}), 
 
         }
-        fields = ('name', 'google_id', 'address', 'city', 'lat', 'lng', 'trips')
+        fields = ('name', 'google_id', 'address', 'city', 'lat', 'lng', 'trips', 'image_url')
 
 class TripShare(forms.ModelForm):
 

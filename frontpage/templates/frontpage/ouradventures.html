@@ -1,0 +1,528 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Home  | Carmen </title>
+        
+            <link rel="icon" type="image/png"
+                  href="{% static 'images/favicon.ico">
+        
+        
+            
+                <meta http-equiv="Content-Type"
+                      content="text/html; charset=utf-8" />
+            
+            
+                <meta http-equiv="Content-Language" value="en-US" />
+            
+            
+                <meta name="viewport"
+                      content="width=device-width, initial-scale=1.0">
+            
+        
+        
+            
+                <link href="/static/css/bootstrap.min.css"
+                      rel="stylesheet" media="screen">
+                <link href="/static/css/2-col-portfolio.css" rel="stylesheet">
+            
+            
+
+
+            
+
+<style>
+html, body {
+  height: 100%;
+}
+#map {
+  height: 60%;
+}
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#saving {
+  margin-left: 12px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+#target {
+  width: 345px;
+}
+
+#bxSlider{
+  max-height: 300px;
+}
+</style>
+
+            
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+        
+    </head>
+
+    <body>
+    
+    <header>
+        <div class="navbar navbar-inverse navbar-fixed-top 
+        ">
+            <div class="container p-none">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle"
+                            data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Wandermust</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                            <li><a href="/accounts/logout/">Logout</a></li>
+                            <li><a href="/trips/"
+                                   class="p-r-none">Trips</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+ <!--   <div id="site-wrapper"> -->
+         
+
+
+
+
+
+<form method="POST" class="post-form" id="thing">
+  <input id="id_name" maxlength="250" name="name" placeholder="I want to go to..." size="15" type="hidden" /><input id="id_google_id" maxlength="250" name="google_id" type="hidden" /><input id="id_address" maxlength="250" name="address" type="hidden" /><input id="id_city" maxlength="250" name="city" type="hidden" /><input id="id_lat" name="lat" type="hidden" /><input id="id_lng" name="lng" type="hidden" /><input id="id_trips" name="trips" type="hidden" />
+  <button id ="saving" type="submit" class="save btn btn-default controls">Let's go!</button>
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  <input type='hidden' name='csrfmiddlewaretoken' value='1s1zWAhVNjjCPuXe596SxW5rN5khTiqQ' />
+</form>
+
+<div id="map"></div>
+
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+       <h3>
+      Our Adventures
+    </h3>
+    <p> Created by: Gene and Dhruti <br>
+</p>
+   
+<ul class="bxslider">
+  <li><img src="/static/img/slider/1.jpg" /></li>
+  <li><img src="/static/img/slider/2.png" /></li>
+  <li><img src="/static/img/slider/4.png" /></li>
+  <li><img src="/static/img/slider/5.jpg" /></li>
+  <li><img src="/static/img/slider/6.jpg" /></li>
+</ul>
+
+    
+  </div>
+  <div class="col-md-5">
+
+<h3>
+      Yale University
+    </h3>   
+    <div>
+      New Haven, CT 06520, USA
+    </div>
+    
+    <h3>
+      Indian Well State Park
+    </h3>   
+    <div>
+      1 Indian Well Rd, Shelton, CT 06484, USA
+    </div>
+    
+    <h3>
+      Caseus
+    </h3>   
+    <div>
+      93 Whitney Ave, New Haven, CT 06510, USA
+    </div>
+    
+    <h3>
+      Yale School of Management
+    </h3>   
+    <div>
+      165 Whitney Ave, New Haven, CT 06511, USA
+    </div>
+    
+    <h3>
+      Killington Ski Area
+    </h3>   
+    <div>
+      Killington Ski Area, Killington, VT 05751, USA
+    </div>
+    
+    <h3>
+      Neptune Oyster
+    </h3>   
+    <div>
+      63 Salem St, Boston, MA 02113, USA
+    </div>
+    
+    <h3>
+      Faneuil Hall Marketplace
+    </h3>   
+    <div>
+      367 S Market St, Boston, MA 02109, USA
+    </div>
+    
+    <h3>
+      Sleeping Giant State Park
+    </h3>   
+    <div>
+      200 Mt Carmel Ave, Hamden, CT 06518, USA
+    </div>
+    
+    <h3>
+      Mansions- The Breakers
+    </h3>   
+    <div>
+      44 Ochre Point Ave, Newport, RI 02840, USA
+    </div>
+    
+    <h3>
+      Barton Springs Pool
+    </h3>   
+    <div>
+      2201 Barton Springs Rd, Austin, TX 78746, USA
+    </div>
+    
+    <h3>
+      Allens Boots
+    </h3>   
+    <div>
+      1522 S Congress Ave, Austin, TX 78704, USA
+    </div>
+    
+    <h3>
+      Texas Discovery Gardens
+    </h3>   
+    <div>
+      3601 Martin Luther King Jr Blvd, Dallas, TX 75210, USA
+    </div>
+    
+    <h3>
+      The Spotted Pig
+    </h3>   
+    <div>
+      314 W 11th St, New York, NY 10014, USA
+    </div>
+    
+    <h3>
+      The Grape Restaurant
+    </h3>   
+    <div>
+      2808 Greenville Ave, Dallas, TX 75206, USA
+    </div>
+    
+    <h3>
+      Shell and bones
+    </h3>   
+    <div>
+      Howard Ave, New Haven, CT, United States
+    </div>
+    
+    <h3>
+      Mozart&#39;s Coffee Roasters
+    </h3>   
+    <div>
+      3825 Lake Austin Blvd, Austin, TX 78703, USA
+    </div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<!--    </div> -->
+    
+    <div class="footer">
+        <div class="container">
+            <p></p>
+        </div>
+    </div>
+</body>
+
+
+    
+    
+        
+            <script src="/static/js/bootstrap.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        
+        
+        
+
+<script>
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initAutocomplete() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 13,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        var homeControlDiv = document.getElementById('saving');
+
+        homeControlDiv.addEventListener('click', function(){
+          console.log('saving')
+          $('#thing').submit()
+        })
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(homeControlDiv);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [
+        ];
+
+
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          console.log("form submitted!")  // sanity check
+          var stuff = $("#pac-input").val();
+          console.log(stuff);
+          var places = searchBox.getPlaces();
+          console.log(places);
+          var obj = JSON.parse(JSON.stringify(places));
+          console.log(places[0].formatted_address);
+          if (places[0].photos) {
+            console.log(places[0].photos[0].getUrl({'maxWidth': 700, 'maxHeight': 700}));
+          }
+
+
+          document.getElementById("id_name").value = places[0].name;
+          document.getElementById("id_google_id").value = places[0].place_id;
+          document.getElementById("id_address").value = places[0].formatted_address;
+          document.getElementById("id_lat").value = places[0].geometry.location.lat();
+          document.getElementById("id_lng").value = places[0].geometry.location.lng();
+
+          var a = places[0].address_components;
+          for(i = 0; i < a.length; ++i) {
+           var t = a[i].types[0];
+           if( t == 'locality')
+            document.getElementById("id_city").value = places[0].address_components[i].long_name;
+        }
+
+
+        if (places.length == 0) {
+          return;
+        }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+
+var bounds = new google.maps.LatLngBounds();
+var infowindow = new google.maps.InfoWindow(); 
+
+var l = [
+
+
+['Yale University', 41.3163244, -72.9223431],
+
+
+
+['Indian Well State Park', 41.3415795, -73.1240183],
+
+
+
+['Caseus', 41.3131573, -72.9215016],
+
+
+
+['Yale School of Management', 41.315128, -72.920231],
+
+
+
+['Killington Ski Area', 43.6200684, -72.8064911],
+
+
+
+['Neptune Oyster', 42.3632309, -71.0559593],
+
+
+
+['Faneuil Hall Marketplace', 42.3601758, -71.0547618],
+
+
+
+['Sleeping Giant State Park', 41.433075, -72.8794382],
+
+
+
+['Mansions- The Breakers', 41.4698082, -71.2981949],
+
+
+
+['Barton Springs Pool', 30.2636934, -97.7707079],
+
+
+
+['Allens Boots', 30.248256, -97.7504957],
+
+
+
+['Texas Discovery Gardens', 32.7757333, -96.7602538],
+
+
+
+['The Spotted Pig', 40.7356067, -74.0066706],
+
+
+
+['The Grape Restaurant', 32.8233506, -96.7699845],
+
+
+
+['Shell and bones', 41.2938061, -72.9331296],
+
+
+
+['Mozart&#39;s Coffee Roasters', 30.2954206, -97.7842697],
+
+ 
+];
+
+var marker, i;
+
+for (i = 0; i < l.length; i++) {  
+  marker = new google.maps.Marker({
+    position: new google.maps.LatLng(l[i][1], l[i][2]),
+    map: map
+  });
+
+  //extend the bounds to include each marker's position
+  bounds.extend(marker.position);
+
+  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    return function() {
+      infowindow.setContent(l[i][0]);
+      infowindow.open(map, marker);
+    }
+  })(marker, i));
+}
+
+//now fit the map to the newly inclusive bounds
+map.fitBounds(bounds);
+}
+
+      $(document).ready(function(){
+      $('.bxslider').bxSlider();
+      });
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoMFoe9rWJTplv_-rYRECyh64qjYHRDuU&libraries=places&callback=initAutocomplete"
+async defer></script>
+            <!-- jQuery library (served from Google) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!-- bxSlider Javascript file -->
+<script src="/static/js/jquery.bxslider.min.js"></script>
+<!-- bxSlider CSS file -->
+<link href="/static/css/jquery.bxslider.css" rel="stylesheet" />
+    
+</html>
