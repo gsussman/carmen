@@ -39,11 +39,11 @@ Trips
 
                 <h2> My Trips </h2>
                                 {% for trip in trips %}
-                <a href="{{ trip.trip_name|slugify }}">
+                <a href="{{ trip.url_readable_state }}">
                     <img class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
                 <h3>
-                    <a href='{{ trip.trip_name|slugify }}'>{{ trip.trip_name }}</a>
+                    <a href='{{ trip.url_readable_state }}'>{{ trip.trip_name }}</a>
                 </h3>
                 <p>{{ trip.trip_name }}</p>
                 {% endfor %}
@@ -54,16 +54,16 @@ Trips
 
                 <h2> Shared Trips </h2>
                 {% for trip in tripshared %}
-                <a href="shared/{{ trip.trip_name|slugify }}">
+                <a href="shared/{{ trip.url_readable_state }}">
                     <img class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
                 <h3>
-                    <a href='{{ trip.trip_name|slugify }}'>{{ trip.trip_name }}</a>
+                    <a href="shared/{{ trip.url_readable_state }}">{{ trip.trip_name }}</a>
                 </h3>
                 <p>{{ trip.trip_name }}</p>
             </div>
                     </div>
-                        {% endfor %}         
+                {% endfor %}         
 
 
         <!-- /.row -->

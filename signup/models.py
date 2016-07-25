@@ -12,10 +12,12 @@ class Trip(models.Model):
  trip_name = models.CharField(max_length=25, null=True)
  start_date = models.DateField(null=True, blank=True)
  end_date = models.DateField(null=True, blank=True)
- 
 
- def __str__(self):
+ def __unicode__(self):
   return self.trip_name
+
+ def url_readable_state(self):
+	return self.trip_name.replace(' ', '-')
 
 class Location(models.Model):
  name = models.CharField(max_length=250)
@@ -27,5 +29,5 @@ class Location(models.Model):
  trips = models.ManyToManyField(Trip, blank=True)
  image_url = models.URLField(null=True, blank=True)
 
- def __str__(self):
+ def __unicode__(self):
   return self.name
