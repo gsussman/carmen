@@ -9,5 +9,5 @@ class LocationAdmin(admin.ModelAdmin):
 admin.site.register(Location, LocationAdmin)
 
 class TripAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('trip_name', 'owner', 'id')
 admin.site.register(Trip, TripAdmin)

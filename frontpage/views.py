@@ -32,8 +32,14 @@ def search(request):
                 l.trips.add(t)
                 l.save()
             if request.user.is_authenticated():
-                t.owner = request.user
-                t.save()
+                if Trip.objects.filter(trip_name = form.cleaned_data['city'], owner = request.user).exists():
+                  oldtrip = Trip.objects.get(trip_name = form.cleaned_data['city'], owner = request.user)
+                  l.trips.add(oldtrip)
+                  l.save()
+                  t.delete()
+                else:
+                  t.owner = request.user
+                  t.save()
                 return HttpResponseRedirect('/trips/')
             else:
                 request.session['trip-id'] = t.id
@@ -46,8 +52,15 @@ def trips(request):
     if 'trip-id' in request.session:
         tid = request.session['trip-id']
         trip = Trip.objects.get(id = tid)
-        trip.owner = request.user
-        trip.save()
+        if Trip.objects.filter(trip_name = trip.trip_name, owner = request.user).exists():
+          oldtrip = Trip.objects.get(trip_name = trip.trip_name, owner = request.user)
+          l = trip.location_set.get()
+          l.trips.add(oldtrip)
+          l.save()
+          trip.delete()
+        else:   
+          trip.owner = request.user
+          trip.save()
         trips = Trip.objects.filter(owner = request.user)
     return render(request, 'frontpage/trips.html', 
         {'trips' : trips,
