@@ -25,3 +25,4 @@ class TripShare(forms.ModelForm):
     class Meta:
         model = Trip
         fields = ('shared_with', 'trip_name')
+        
