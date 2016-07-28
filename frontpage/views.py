@@ -83,7 +83,7 @@ def trip_details(request, name):
         if 'triptag' in request.POST:
             tripshare = TripShare(request.POST, instance=trip, prefix = 'triptag')
             if tripshare.is_valid():
-                tripshare.save()
+              tripshare.save()
         else:
             form = LocationInput(request.POST)
             if form.is_valid():

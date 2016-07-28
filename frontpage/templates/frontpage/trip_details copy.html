@@ -6,13 +6,7 @@ html, body {
   height: 100%;
 }
 #map {
-    width:66.6667%;
-    height:calc(100% - 0);
-    position:absolute;
-    left:1px;
-    top:50px;
-    bottom:0;
-    overflow:hidden;
+  height: 60%;
 }
 .controls {
   margin-top: 10px;
@@ -72,8 +66,7 @@ html, body {
 
 {% block content %} 
 
-<div id="map"></div>
-<div class="container-fluid" id="main">
+
 
 {% if messages %}
 <ul class="messages">
@@ -83,14 +76,6 @@ html, body {
 </ul>
 {% endif %}
 
-  <div class="row">
-    <div class="col-xs-8"></div>
-    <div class="col-xs-4" id="right">
-
-
-
- 
-
 <form method="POST" class="post-form" id="thing">
   {{ form.as_p }}
   <button id ="saving" type="submit" class="save btn btn-default controls">Save</button>
@@ -98,21 +83,40 @@ html, body {
   {% csrf_token %}
 </form>
 
+<div id="map"></div>
 
 
-    <h1>
-      {{ trip.trip_name }}     <small><a href="" data-toggle="modal" data-target="#myModal" style="font-size: small;
-}">Edit</a>  </small>
-    </h1>
-    <!-- Button trigger modal -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+    {% for location in locations %}
 
+
+
+    <h3>
+      {{location.name}}
+    </h3>   
+    <div>
+      {{location.address}}
+    </div>
+          <a href="{% url 'delete' pkloc=location.id pktrip=trip.id %}">
+                <small>Remove location</small>
+                 </a>
+    {% endfor%}
+  </div>
+  <div class="col-md-5">
+    <h3>
+      {{ trip.trip_name }}
+    </h3>
     <p> Created by: {{ trip.owner }} <br>
     Shared with: {% for objs in trip.shared_with.all %}
              {{ objs }}
              {% endfor %}</p>
 
 
-
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      Edit Trip Details
+    </button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -143,36 +147,11 @@ html, body {
     </div>
   </div>
 
+</div>
 
 
 
-    {% for location in locations %}
-
-
-
-    <h3>
-      {{location.name}}
-    </h3>   
-    <div>
-      {{location.address}}
-    </div>
-          <a href="{% url 'delete' pkloc=location.id pktrip=trip.id %}">
-                <small>Remove location</small>
-                 </a>
-    {% endfor%}
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
 
 
 
