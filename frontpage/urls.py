@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 	url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',
      {'next_page': '/'}),
+    url(r'^delete/(?P<pkloc>\w+)/(?P<pktrip>\w+)/$', views.delete, name='delete'),
 ]

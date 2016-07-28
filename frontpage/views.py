@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from signup.forms import LocationInput, TripShare
 from django.http import HttpResponseRedirect
 from django.contrib import messages
@@ -73,7 +73,7 @@ def trips(request):
         {'trips' : trips,
         'random' : random})
 
-def trip_details(request, name='unknown'):
+def trip_details(request, name):
     name = name.replace('-', ' ').title()
     trip = Trip.objects.get(trip_name = name, owner = request.user)
     locations = trip.location_set.all()
@@ -103,7 +103,7 @@ def trip_details(request, name='unknown'):
         'form' : formloc,
         'tripform' : formtripshare})
 
-def trip_details_shared(request, name='unknown'):
+def trip_details_shared(request, name):
     name = name.replace('-', ' ').title()
     trip = Trip.objects.get(trip_name = name, shared_with = request.user)
     locations = trip.location_set.all()
@@ -133,6 +133,14 @@ def trip_details_shared(request, name='unknown'):
         'form' : formloc,
         'tripform' : formtripshare})
 
+@login_required
+def delete(request, pkloc, pktrip):
+    loc = get_object_or_404(Location, pk=pkloc)
+    trip = get_object_or_404(Trip, pk=pktrip)
+    trip.location_set.remove(loc)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 class RegView(RegistrationView):
     def get_success_url(self, user):
         return '/trips/'
@@ -151,3 +159,5 @@ def birthday(request):
 
 def ouradventures(request):
     return render(request, 'frontpage/ouradventures.html', {})
+
+

@@ -89,12 +89,18 @@ html, body {
 <div class="row">
   <div class="col-md-6 col-md-offset-1">
     {% for location in locations %}
+
+
+
     <h3>
       {{location.name}}
     </h3>   
     <div>
       {{location.address}}
     </div>
+          <a href="{% url 'delete' pkloc=location.id pktrip=trip.id %}">
+                <small>Remove location</small>
+                 </a>
     {% endfor%}
   </div>
   <div class="col-md-5">
