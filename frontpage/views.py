@@ -4,11 +4,13 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-from signup.models import Location, Trip
+from signup.models import Location, Trip, LocImage
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
 from registration.views import ActivationView 
 from registration.backends.simple.views import RegistrationView
+import itertools
+import random
 
 # Create your views here.
 
@@ -21,6 +23,9 @@ def search(request):
         form = LocationInput(request.POST)
         if form.is_valid():
             t = Trip(trip_name = form.cleaned_data['city'])
+            i = LocImage.objects.all()
+            choice = random.choice(i)
+            t.image = choice.image
             t.save()
             if Location.objects.filter(google_id=form.cleaned_data['google_id']).exists():
                 l = Location.objects.get(google_id=form.cleaned_data['google_id'])
@@ -47,8 +52,10 @@ def search(request):
     return render(request, 'frontpage/search.html', {'form': form})
 
 def trips(request):
-    trips = Trip.objects.filter(owner = request.user)
+    tripsalone = Trip.objects.filter(owner = request.user)
     tripshared = Trip.objects.filter(shared_with = request.user)
+    trips = itertools.chain(tripsalone, tripshared)
+    random = ['Adventurer', 'Travel buddy', 'Travel companion', 'Mate', 'Travel mate', 'Hostel friend', 'Partner in crime', 'Comrade', 'Accomplice', 'Confidant', 'Buddy']
     if 'trip-id' in request.session:
         tid = request.session['trip-id']
         trip = Trip.objects.get(id = tid)
@@ -64,7 +71,7 @@ def trips(request):
         trips = Trip.objects.filter(owner = request.user)
     return render(request, 'frontpage/trips.html', 
         {'trips' : trips,
-         'tripshared' : tripshared})
+        'random' : random})
 
 def trip_details(request, name='unknown'):
     name = name.replace('-', ' ').title()

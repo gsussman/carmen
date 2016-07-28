@@ -1,0 +1,26 @@
+<head>
+  <title>My page</title>
+
+<script type="text/javascript" src="http://www.panoramio.com/wapi/wapi.js?v=1"></script>
+<body>
+
+<div id="wapiblock"></div>
+
+</body>
+
+<script type="text/javascript">
+
+var myRequest = new panoramio.PhotoRequest({
+      'tag': 'New York',
+    });
+  var myOptions = {
+          'width': 1000,
+          'height': 1000
+        };
+  var widget = new panoramio.PhotoWidget('wapiblock', myRequest, myOptions);
+  console.log(widget);
+
+  widget.setPosition(0);
+
+
+</script>

@@ -12,6 +12,7 @@ class Trip(models.Model):
  trip_name = models.CharField(max_length=25, null=True)
  start_date = models.DateField(null=True, blank=True)
  end_date = models.DateField(null=True, blank=True)
+ image =  models.URLField(null=True, blank=True)
 
  def __unicode__(self):
   return self.trip_name
@@ -31,3 +32,10 @@ class Location(models.Model):
 
  def __unicode__(self):
   return self.name
+
+class LocImage(models.Model):
+ image = models.URLField()
+
+
+ def __unicode__(self):
+  return self.image 

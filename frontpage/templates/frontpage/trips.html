@@ -5,69 +5,85 @@ Trips
 {% endblock title %}
 
 {% block head_css_page %}
-    <link href="../static/css/2-col-portfolio.css" rel="stylesheet">
+<link href="../static/css/2-col-portfolio.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-{% endblock head_css_page %}
+        <![endif]-->
+        {% endblock head_css_page %}
 
 
         {% block content %}
 
-    <!-- Page Content -->
-    <div class="container">
+        <!-- Page Content -->
+        <div class="container">
 
-        <!-- Page Header -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Page Heading
-                    <small>Secondary Text</small>
-                </h1>
+            <!-- Page Header -->
+            <div class="row">
+                <div class="col-lg-12" style="text-align: center;">
+                    <h2 class="page-header" style="margin-bottom: 6px;">Discover<br>
+                        <small>Destinations you want to explore</small></h2>
+
+                    
+                </div>
             </div>
-        </div>
-        <!-- /.row -->
+            <!-- /.row -->
 
-        <!-- Projects Row -->
-        
+            <!-- Projects Row -->
 
-        <div class="row">
-            <div class="col-md-6 portfolio-item">
 
-                <h2> My Trips </h2>
+            <div class="row">
                                 {% for trip in trips %}
-                <a href="{{ trip.url_readable_state }}">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href='{{ trip.url_readable_state }}'>{{ trip.trip_name }}</a>
-                </h3>
-                <p>{{ trip.trip_name }}</p>
-                {% endfor %}
-            </div>
-                        
-        <div class="row">
-            <div class="col-md-6 portfolio-item">
+                <div class="col-md-4 portfolio-item">
+{% ifequal trip.owner request.user %}
+                    <a href="{{ trip.url_readable_state }}" style="text-decoration: none;">
+{% endifequal %}
 
-                <h2> Shared Trips </h2>
-                {% for trip in tripshared %}
-                <a href="shared/{{ trip.url_readable_state }}">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="shared/{{ trip.url_readable_state }}">{{ trip.trip_name }}</a>
-                </h3>
-                <p>{{ trip.trip_name }}</p>
-            </div>
+{% ifnotequal trip.owner request.user %}
+                    <a href="shared/{{ trip.url_readable_state }}" style="text-decoration: none;">
+{% endifnotequal %}
+
+
+                        <div style="background-image: url('{{ trip.image }}');     height: 344px;
+                        background-size: cover;
+                        background-position: center;
+                        position: relative;">
+                        <div style="width: 100%; height: 100%;
+                        display: table;
+                        position: relative;">
+                        <h2 style="text-align: center;
+                        display: table-cell;
+                        color: #fff; vertical-align: middle; text-shadow: 0 0 1em #000;">{{ trip.trip_name }}</h2>
                     </div>
-                {% endfor %}         
+                    <p>
+                        {% ifnotequal trip.owner request.user %}
+                           {{ random|random }}: {{ trip.owner }}
+                        {% endifnotequal %}
+
+                    </p>
+                </div>
+            </a>
+        </div>
+            {% if forloop.counter|divisibleby:3 %}
+        </div>
+        <div class="row">
+            {% endif %}
+
+            {% endfor %}
+        </div>
+
+
+
+
+
+
 
 
         <!-- /.row -->
 
     </div>
     <!-- /.container -->
-        {% endblock content %}
+    {% endblock content %}
