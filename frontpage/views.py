@@ -11,6 +11,7 @@ from registration.views import ActivationView
 from registration.backends.simple.views import RegistrationView
 import itertools
 import random
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -139,6 +140,19 @@ def delete(request, pkloc, pktrip):
     trip = get_object_or_404(Trip, pk=pktrip)
     trip.location_set.remove(loc)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def deletetrip(request, pktrip):
+    trip = get_object_or_404(Trip, pk=pktrip)
+    trip.delete()
+    return HttpResponseRedirect('/trips/')
+
+@login_required
+def deletemefromtrip(request, userid, pktrip):
+    user = get_object_or_404(User, pk=userid)
+    trip = get_object_or_404(Trip, pk=pktrip)
+    trip.shared_with.remove(user)
+    return HttpResponseRedirect('/trips/')
 
 
 class RegView(RegistrationView):

@@ -23,4 +23,6 @@ urlpatterns = [
 	url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',
      {'next_page': '/'}),
     url(r'^delete/(?P<pkloc>\w+)/(?P<pktrip>\w+)/$', views.delete, name='delete'),
+    url(r'^deletetrip/(?P<pktrip>\w+)/$', views.deletetrip, name='deletetrip'),
+    url(r'^deletemetrip/(?P<userid>\w+)/(?P<pktrip>\w+)/$', views.deletemefromtrip, name='deletemefromtrip'),
 ]

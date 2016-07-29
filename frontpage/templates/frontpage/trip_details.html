@@ -150,7 +150,16 @@ html, body {
            <form method="POST" class="post-form">
             {{ tripform.as_p }}
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        {% ifnotequal trip.owner request.user %}
+              <a href="{% url 'deletemefromtrip' userid=request.user.id pktrip=trip.id %}">Remove me from trip</a>
+                        {% endifnotequal %}
+                        {% ifequal trip.owner request.user %}
+              <a href="{% url 'deletetrip' pktrip=trip.id %}">Delete Trip</a>
+                        {% endifequal %}
+
+
+
               <button type="submit" class="save btn btn-default" name="triptag">Save</button>
               {% csrf_token %}
             </div>
