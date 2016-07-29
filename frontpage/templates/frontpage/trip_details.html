@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block head_css_page %}
+{% load staticfiles%}
 
 <style>
 html, body {
@@ -163,8 +164,8 @@ html, body {
 <div style ="display: table; margin-bottom: 10px;">
   <div style ="display: table-cell;
     text-align: center;
-    vertical-align: middle;">
-<img src = '../../static/img/locationpointer.png' style="width: 36px;
+    vertical-align: top;">
+<img src = "{% static 'img/locationpointer.png' %}" style="width: 36px;
     float: left;
     margin-right: 10px;">
   </div>
