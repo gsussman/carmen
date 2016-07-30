@@ -72,7 +72,7 @@ background-color: #f5f5f5;
                         {% if user.is_authenticated %}
                             {% if user.socialaccount_set.all.0.get_avatar_url %}
                             <li><img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" style="width: 50px; border-radius: 25px;"/></li>  {% endif %}
-                            <li> <a style ="color: white;">Hey there, {{ request.user.first_name }}</a></li>
+                            <li> <a style ="color: white;">{{ request.user.first_name }}</a></li>
                             <li><a href="/accounts/logout/">Logout</a></li>
                             <li><a href="/trips/"
                                    class="p-r-none">Trips</a></li>
