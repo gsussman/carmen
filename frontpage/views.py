@@ -53,12 +53,20 @@ def search(request):
     return render(request, 'frontpage/search.html', {'form': form})
 
 def trips(request):
+    print '1'
+    if 'trip-id' in request.session:
+      print request.session['trip-id']
     tripsalone = Trip.objects.filter(owner = request.user)
     tripshared = Trip.objects.filter(shared_with = request.user)
     trips = itertools.chain(tripsalone, tripshared)
     random = ['Adventurer', 'Travel buddy', 'Travel companion', 'Mate', 'Travel mate', 'Hostel friend', 'Partner in crime', 'Comrade', 'Accomplice', 'Confidant', 'Buddy']
     if 'trip-id' in request.session:
         tid = request.session['trip-id']
+        del request.session['trip-id']
+        if 'trip-id' in request.session:
+          print request.session['trip-id']
+        else:
+          print 'no trip-id'
         trip = Trip.objects.get(id = tid)
         if Trip.objects.filter(trip_name = trip.trip_name, owner = request.user).exists():
           oldtrip = Trip.objects.get(trip_name = trip.trip_name, owner = request.user)
