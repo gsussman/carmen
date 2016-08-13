@@ -162,6 +162,39 @@ def deletemefromtrip(request, userid, pktrip):
     trip.shared_with.remove(user)
     return HttpResponseRedirect('/trips/')
 
+def home(request):
+    form = LocationInput()
+    if request.method == "POST":
+        form = LocationInput(request.POST)
+        if form.is_valid():
+            t = Trip(trip_name = form.cleaned_data['city'])
+            i = LocImage.objects.all()
+            choice = random.choice(i)
+            t.image = choice.image
+            t.save()
+            if Location.objects.filter(google_id=form.cleaned_data['google_id']).exists():
+                l = Location.objects.get(google_id=form.cleaned_data['google_id'])
+                l.trips.add(t)
+                l.save()
+            else:
+                form.save()
+                l = Location.objects.get(google_id=form.cleaned_data['google_id'])
+                l.trips.add(t)
+                l.save()
+            if request.user.is_authenticated():
+                if Trip.objects.filter(trip_name = form.cleaned_data['city'], owner = request.user).exists():
+                  oldtrip = Trip.objects.get(trip_name = form.cleaned_data['city'], owner = request.user)
+                  l.trips.add(oldtrip)
+                  l.save()
+                  t.delete()
+                else:
+                  t.owner = request.user
+                  t.save()
+                return HttpResponseRedirect('/trips/')
+            else:
+                request.session['trip-id'] = t.id
+                return HttpResponseRedirect('/accounts/signup') 
+    return render(request, 'frontpage/frontpage.html', {'form': form})
 
 class RegView(RegistrationView):
     def get_success_url(self, user):

@@ -9,7 +9,7 @@ from views import RegView, MyRegistrationView
 #        return '/rango/'
 
 urlpatterns = [
-    url(r'^$', views.search, name='search'),
+    url(r'^$', views.home, name='home'),
     url(r'^search/$', views.search, name='search'),
     url(r'^birthday/$', views.birthday, name='birthday'),
     url(r'^trips/ouradventures/$', views.ouradventures, name='ouradventures'),
@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^delete/(?P<pkloc>\w+)/(?P<pktrip>\w+)/$', views.delete, name='delete'),
     url(r'^deletetrip/(?P<pktrip>\w+)/$', views.deletetrip, name='deletetrip'),
     url(r'^deletemetrip/(?P<userid>\w+)/(?P<pktrip>\w+)/$', views.deletemefromtrip, name='deletemefromtrip'),
+    url(r'^home/$', views.home, name='home'),
 ]
